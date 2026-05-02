@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LaundryKu</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+
+    background:
+    linear-gradient(rgba(15,23,42,0.6), rgba(15,23,42,0.6)),
+    url('https://images.unsplash.com/photo-1604335399105-a0c585fd81a1?auto=format&fit=crop&w=1600&q=80');
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Topbar */
+.topbar {
+    padding: 18px 40px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+    color: white;
+    letter-spacing: 1px;
+}
+
+/* Container */
+.container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* Header */
+.header {
+    color: white;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.header p {
+    opacity: 0.85;
+}
+
+/* Highlight */
+.highlight {
+    background: rgba(255,255,255,0.08);
+    padding: 18px;
+    border-radius: 14px;
+    color: #e2e8f0;
+    margin-bottom: 25px;
+    backdrop-filter: blur(8px);
+}
+
+/* Card Premium */
+.card {
+    background: rgba(255,255,255,0.96);
+    border-radius: 22px;
+    margin-bottom: 28px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+    overflow: hidden;
+}
+
+/* Card Header */
+.card-header {
+    padding: 20px 26px;
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    color: white;
+    font-weight: 500;
+}
+
+/* Card Body */
+.card-body {
+    padding: 26px;
+}
+
+/* Form */
+.form-group {
+    margin-bottom: 18px;
+}
+
+label {
+    font-size: 13px;
+    color: #475569;
+    margin-bottom: 6px;
+    display: block;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    font-size: 14px;
+    background: #f8fafc;
+    transition: 0.25s;
+}
+
+input:focus, select:focus {
+    border-color: #6366f1;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+    outline: none;
+}
+
+/* Button */
+button {
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    color: white;
+    border: none;
+    padding: 13px 26px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(99,102,241,0.4);
+}
+
+/* Table */
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+thead {
+    background: #f8fafc;
+}
+
+th {
+    text-align: left;
+    padding: 14px;
+    color: #64748b;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+td {
+    padding: 16px 14px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+tr:nth-child(even) {
+    background: #fcfcfd;
+}
+
+tr:hover {
+    background: rgba(99,102,241,0.05);
+}
+
+/* Status */
+.status {
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+    color: #3730a3;
+}
+
+/* Delete */
+.delete-btn {
+    background: #ef4444;
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 8px;
+}
+
+.delete-btn:hover {
+    background: #dc2626;
+}
+
+/* Empty */
+.empty {
+    text-align: center;
+    padding: 35px;
+    color: #94a3b8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+    LAUNDRYKU • MANAGEMENT SYSTEM
+</div>
+
+<div class="container">
+
+    <div class="header">
+        <h1>LaundryKu</h1>
+        <p>Kelola order laundry dengan cepat, rapi, dan profesional</p>
+    </div>
+
+    <div class="highlight">
+        Sistem membantu mencatat order, menghitung total otomatis, dan memantau status laundry.
+    </div>
+
+    <!-- Tambah Order -->
+    <div class="card">
+        <div class="card-header">Tambah Order</div>
+        <div class="card-body">
+
+            <div class="form-group">
+                <label>Nama Customer</label>
+                <input type="text" id="customer">
+            </div>
+
+            <div class="form-group">
+                <label>Layanan</label>
+                <select id="serviceType">
+                    <option value="Reguler">Reguler (Rp 10.000/kg)</option>
+                    <option value="Express">Express (Rp 15.000/kg)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Berat (kg)</label>
+                <input type="number" id="weight" step="any">
+            </div>
+
+            <button onclick="addOrder()">Tambah Order</button>
+
+        </div>
+    </div>
+
+    <!-- Daftar Order -->
+    <div class="card">
+        <div class="card-header">Daftar Order</div>
+        <div class="card-body">
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Customer</th>
+                            <th>Layanan</th>
+                            <th>Berat</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="orderList">
+                        <tr><td colspan="7" class="empty">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+const API_URL = 'http://localhost/laundry_apk/backend/index.php';
+
+async function loadOrders() {
+    try {
+        const res = await fetch(API_URL);
+        const data = await res.json();
+
+        const el = document.getElementById('orderList');
+
+        if (data.length === 0) {
+            el.innerHTML = `<tr><td colspan="7" class="empty">Belum ada order</td></tr>`;
+            return;
+        }
+
+        el.innerHTML = data.map(o => `
+            <tr>
+                <td>${o.id}</td>
+                <td><strong>${o.customer}</strong></td>
+                <td>${o.serviceType}</td>
+                <td>${o.weight} kg</td>
+                <td>Rp ${o.total.toLocaleString()}</td>
+                <td><span class="status">${o.status}</span></td>
+                <td><button class="delete-btn" onclick="deleteOrder(${o.id})">Hapus</button></td>
+            </tr>
+        `).join('');
+
+    } catch {
+        document.getElementById('orderList').innerHTML =
+        `<tr><td colspan="7" class="empty">Gagal load data</td></tr>`;
+    }
+}
+
+async function addOrder() {
+    const customer = document.getElementById('customer').value.trim();
+    const serviceType = document.getElementById('serviceType').value;
+    const weight = parseFloat(document.getElementById('weight').value);
+
+    if (!customer || !weight) return alert('Isi data dulu');
+
+    await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ customer, serviceType, weight })
+    });
+
+    document.getElementById('customer').value = '';
+    document.getElementById('weight').value = '';
+
+    loadOrders();
+}
+
+async function deleteOrder(id) {
+    if (!confirm('Hapus?')) return;
+    await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+    loadOrders();
+}
+
+loadOrders();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  laundry-app:
+    build: .
+    container_name: laundry-container
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+    restart: always
