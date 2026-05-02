@@ -7,6 +7,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Serve frontend static files
+app.use(express.static(path.join(__dirname, '../frontend')));
+
 const DATA_FILE = path.join(__dirname, 'data.json');
 
 // Inisialisasi data
@@ -48,7 +51,7 @@ app.post('/api/orders', (req, res) => {
   res.status(201).json(newOrder);
 });
 
-// DELETE order (opsional)
+// DELETE order
 app.delete('/api/orders/:id', (req, res) => {
   const id = parseInt(req.params.id);
   const data = JSON.parse(fs.readFileSync(DATA_FILE));
@@ -57,6 +60,7 @@ app.delete('/api/orders/:id', (req, res) => {
   res.json({ message: 'Order dihapus' });
 });
 
-app.listen(3000, () => {
-  console.log('✅ Backend laundry berjalan di http://localhost:3000');
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`✅ Backend laundry berjalan di port ${PORT}`);
 });

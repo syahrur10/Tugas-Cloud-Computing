@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000/api/orders';
+const API_URL = 'http://tugas-cloud-computing-production.up.railway.app';
 
 async function loadOrders() {
     const res = await fetch(API_URL);
